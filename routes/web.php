@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EspecieController;
+use App\Http\Controllers\AnimalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::Resources([
+    "especie" => EspecieController::class,
+    "animal" => AnimalController::class
+]);
+
 
 Route::get('/', function () {
     return view('welcome');
