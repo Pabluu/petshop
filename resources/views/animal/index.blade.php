@@ -4,28 +4,41 @@
 
 @section("formulario")
 <h1>Gerenciamento do Animal</h1>
-<form action="/especie" method="POST" class="row" onsubmit="">
+<form action="/animal" method="POST" class="row" onsubmit="">
     <div class="form-group col-6">
-        <label for="descricao">Nome do animal</label>
-        <input type="text" maxlength='100' name="descricao" class="form-control" value="" />
+        <label for="nome">Nome do animal</label>
+        <input type="text" maxlength='100' name="nome" class="form-control" value="{{$animal->nome}}" />
     </div>
 
     <div class="form-group col-6">
-        <label for="descricao">Responsável</label>
-        <input type="text" maxlength='100' name="descricao" class="form-control" value="" />
+    <label for="nome_dono">Espécie</label>
+
+        <select name='especie_id' id="" class="form-control selectpicker" data-live-search='true'>
+            <option value=""></option>
+            @foreach($animais as $animal)
+            <option value=" {{$animal->id}}" @selected($especie->especie_id == $animal->id)>
+                {{$animal->nome}}
+            </option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group col-6">
-        <label for="descricao">Espécie do Animal</label>
-        <input type="text" maxlength='100' name="descricao" class="form-control" value="" />
+        <label for="nome_dono">Responsável</label>
+        <input type="text" maxlength='100' name="nome_dono" class="form-control" value="{{$animal->nome_dono}}" />
     </div>
 
     <div class="form-group col-6">
-        <label for="descricao">Data de Nascimento</label>
-        <input type="date" max="2022-06-23" name="descricao" class="form-control" value="" />
-    </div>    
+        <label for="raca">Raça</label>
+        <input type="text" maxlength='100' name="raca" class="form-control" value="{{$animal->raca}}" />
+    </div>
 
-    <div class="form-group col-2">
+    <div class="form-group col-6">
+        <label for="data_nascimento">Data de Nascimento</label>
+        <input type="date" max="2022-06-23" name="data_nascimento" class="form-control" value="{{$animal->data_nascimento}}" />
+    </div>
+
+    <div class="form-group col-3">
         @csrf
         <input type="hidden" name="id" value="" />
 
@@ -50,18 +63,28 @@
 <table id="tabProdutos" class="table table-striped text-center" style="margin-top: 10px;">
     <colgroup>
         <col width="200">
+        <col width="200">
+        <col width="100">
+        <col width="100">
         <col colspan='2' width="100">
         <col width="100">
     </colgroup>
     <thead>
         <tr>
-            <th>Descrição</th>
+            <th>Nome</th>
+            <th>Responsável</th>
+            <th>Raça</th>
+            <th>Idade</th>
             <th colspan='2'>Ações</th>
         </tr>
     </thead>
     <tbody>
+        @foreach($animais as $animal)
         <tr>
-            <td class="td_descricao"></td>
+            <td class="td_nome">{{$animal->nome}}</td>
+            <td class="td_nome">{{$animal->nome_dono}}</td>
+            <td class="td_nome">{{$animal->raca}}</td>
+            <td class="td_nome">{{$animal->idade}}</td>
             <td>
                 <a href="" class="btn btn-warning">
                     <i class="bi bi-pencil-square"></i>
@@ -79,6 +102,7 @@
                 </form>
             </td>
         </tr>
+        @endforeach
     </tbody>
 </table>
 @endsection
